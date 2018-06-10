@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comandes de taller{% endblock %}
+
+{% block body %}
+    {% if comandas %}
+        <table id="comandas" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Num</th>
+                <th>Client</th>
+                <th>Accions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for comanda in comandas %}
+                <tr>
+                    <td>{{ comanda.id }}</td>
+                    <td>{{ comanda.customer }}</td>
+                    <td>
+                        <a href="/comanda/{{ comanda.id }}" class="btn btn-dark">Mostrar</a>
+                        <a href="/comanda/edit/{{ comanda.id }}" class="btn btn-light">Editar</a>
+                        <a href="#" class="btn btn-danger delete-article" data-id="{{ comanda.id }}">Borrar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hi ha comandes per mostrar</p>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/main.js"></script>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Llistat clients{% endblock %}
+
+{% block body %}
+    {% if customers %}
+        <table id="customers" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Num</th>
+                <th>Client</th>
+                <th>Email</th>
+                <th>Telf</th>
+                <th>Accions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for customer in customers %}
+                <tr>
+                    <td>{{ customer.id }}</td>
+                    <td>{{ customer.name }}</td>
+                    <td>{{ customer.email }}</td>
+                    <td>{{ customer.telephone }}</td>
+                    <td>
+                        <a href="/comanda/{{ customer.id }}" class="btn btn-dark">Mostrar</a>
+                        <a href="/comanda/edit/{{ customer.id }}" class="btn btn-light">Editar</a>
+                        <a href="#" class="btn btn-danger delete-article" data-id="{{ customer.id }}">Borrar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hi ha clients per mostrar</p>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/main.js"></script>
+{% endblock %}
