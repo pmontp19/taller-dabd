@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc10ead1-4e74-4547-b156-ca8845b2407e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
     </list>
     <ignored path=".idea/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -65,7 +64,7 @@
             <entry file="file://$PROJECT_DIR$/Procfile">
               <provider selected="true" editor-type-id="text-editor">
                 <state>
-                  <caret column="32" selection-start-column="32" selection-end-column="32" />
+                  <caret column="43" selection-start-column="43" selection-end-column="43" />
                 </state>
               </provider>
             </entry>
@@ -398,6 +397,11 @@
             </path>
             <path>
               <item name="taller-dabd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="taller-dabd" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="taller-dabd" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="bcb0276e:PhpExternalLibrariesNodePatcher$PatchedExternalLibrariesNode" />
             </path>
             <path>
@@ -454,7 +458,7 @@
       <workItem from="1527632500875" duration="3397000" />
       <workItem from="1528359463603" duration="20780000" />
       <workItem from="1528566486830" duration="13848000" />
-      <workItem from="1528726172926" duration="18009000" />
+      <workItem from="1528726172926" duration="18340000" />
     </task>
     <task id="LOCAL-00001" summary="Customer &amp; orders controllers">
       <created>1528627753934</created>
@@ -470,11 +474,18 @@
       <option name="project" value="LOCAL" />
       <updated>1528795341325</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="procfile">
+      <created>1528796951515</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1528796951516</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66756000" />
+    <option name="totallyTimeSpent" value="67087000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -516,7 +527,8 @@
     <MESSAGE value="Customer &amp; orders controllers" />
     <MESSAGE value="delete order, customer templates, translations" />
     <MESSAGE value="chmoded" />
-    <option name="LAST_COMMIT_MESSAGE" value="chmoded" />
+    <MESSAGE value="procfile" />
+    <option name="LAST_COMMIT_MESSAGE" value="procfile" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -861,7 +873,7 @@
     <entry file="file://$PROJECT_DIR$/Procfile">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="32" selection-start-column="32" selection-end-column="32" />
+          <caret column="43" selection-start-column="43" selection-end-column="43" />
         </state>
       </provider>
     </entry>
