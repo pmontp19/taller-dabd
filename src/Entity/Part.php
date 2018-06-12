@@ -129,6 +129,6 @@ class Part
         return $this;
     }
     public function __toString() {
-        return $this->name;
+        return $this->name.' '.$this->price.' €';
     }
 }

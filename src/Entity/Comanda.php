@@ -65,10 +65,55 @@ class Comanda
      */
     private $technician;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $total;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $time;
+
+
     public function __construct()
     {
         $this->part = new ArrayCollection();
         $this->service = new ArrayCollection();
+        $this->creation = new \DateTime('now', new \DateTimeZone('GMT+2'));
+        $this->status = false;
+    }
+
+    public function getTime() {
+        $sum = 0;
+        $services = $this->getService();
+        foreach ($services as $service) {
+            $sum = $sum + $service->getLength();
+        }
+        return $sum;
+    }
+
+    public function getTotal(){
+        $parts = $this->getPart();
+        $sum=0;
+        foreach ($parts as $part) {
+            $sum = $sum + $part->getPrice();
+        }
+        $services = $this->getService();
+        foreach ($services as $service) {
+            $sum = $sum + $service->getPrice();
+        }
+        return $sum;
+    }
+
+    public function setTotal(){
+        $parts = $this->getPart();
+        $sum=0;
+        foreach ($parts as $part) {
+            $sum = $sum + $part->getPrice();
+        }
+        $this->total = $sum;
+        return $this;
     }
 
     public function getId()
@@ -210,5 +255,10 @@ class Comanda
         $this->technician = $technician;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return strval($this->id);
     }
 }

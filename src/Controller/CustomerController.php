@@ -34,4 +34,81 @@ class CustomerController extends Controller
         return $this->render('customer/index.html.twig', array('customers'=> $customers));
     }
 
+    /**
+     * @Route("/customer/new", name="new_customer")
+     * Method({"GET", "POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function new(Request $request) {
+        $customer = new Customer();
+
+        $form = $this->createFormBuilder($customer)
+            ->add('name')
+            ->add('dni')
+            ->add('email')
+            ->add('telephone')
+            ->add('postal_code')
+            ->add('save', SubmitType::class, array(
+                'label' => 'Crear',
+                'attr' => array('class' => 'btn btn-primary mt-3')
+            ))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $customer = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($customer);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('customers_list');
+        }
+
+        return $this->render('customer/new.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/customers/edit/{id}", name="edit_customer")
+     * Method({"GET", "POST"})
+     */
+    public function edit(Request $request, $id) {
+        $customer = $this->getDoctrine()->getRepository(Customer::class)->find($id);
+
+        $form = $this->createFormBuilder($customer)
+            ->add('name')
+            ->add('email')
+            ->add('telephone')
+            ->add('postal_code')
+            ->add('comandas')
+            ->add('save',SubmitType::class, array(
+                'label' => 'Update',
+                'attr' => array('class' => 'btn btn-primary mt-3')
+            ))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+
+            return $this->redirectToRoute('customers_list');
+        }
+        return $this->render('customer/edit.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/customers/{id}", name="customer_show")
+     */
+    public function show($id) {
+        $customer = $this->getDoctrine()->getRepository(Customer::class)->find($id);
+        return $this->render('customer/show.html.twig',array('customer' => $customer));
+    }
 }

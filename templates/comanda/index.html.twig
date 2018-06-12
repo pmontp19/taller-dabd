@@ -9,6 +9,8 @@
             <tr>
                 <th>Num</th>
                 <th>Client</th>
+                <th>Producte</th>
+                <th>Total</th>
                 <th>Accions</th>
             </tr>
             </thead>
@@ -17,6 +19,8 @@
                 <tr>
                     <td>{{ comanda.id }}</td>
                     <td>{{ comanda.customer }}</td>
+                    <td>{{ comanda.product }}</td>
+                    <td>{{ comanda.total }} €</td>
                     <td>
                         <a href="/comanda/{{ comanda.id }}" class="btn btn-dark">Mostrar</a>
                         <a href="/comanda/edit/{{ comanda.id }}" class="btn btn-light">Editar</a>

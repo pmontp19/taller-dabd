@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ comanda.customer }}{% endblock %}
+
+{% block body %}
+    <h1>{{ comanda.customer }}</h1>
+    <h2>Comanda número: {{ comanda.id }}</h2>
+    <p>Comentaris: {{ comanda.comments }}</p>
+    <p>Feta per: {{ comanda.technician }}</p>
+    {% if comanda.status == 1 %}
+        <p>Estat: <input disabled type="checkbox" checked></p>
+    {% else %}
+        <p>Estat: <input disabled type="checkbox"></p>
+        <a href="/comanda/done/{{ comanda.id }}" class="btn btn-primary">Passar a feta</a>
+    {% endif %}
+    <p>Temps que ocuparà: {{ comanda.time }} minuts</p>
+    <p>Total: {{ comanda.total }} euros</p>
+    <p><em>Data de creació: {{ comanda.creation|date('d-m-Y') }}</em></p>
+    <hr>
+    <a href="/">Enrere</a>
+{% endblock %}

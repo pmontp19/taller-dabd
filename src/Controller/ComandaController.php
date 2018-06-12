@@ -10,7 +10,9 @@
   use App\Entity\Article;
 
   use App\Entity\Comanda;
+  use App\Entity\Customer;
   use Doctrine\DBAL\Types\DateType;
+  use Doctrine\ORM\Query\ResultSetMapping;
   use Symfony\Component\HttpFoundation\Response;
   use Symfony\Component\HttpFoundation\Request;
   use Symfony\Component\Routing\Annotation\Route;
@@ -21,6 +23,7 @@
   use Symfony\Component\Form\Extension\Core\Type\TextareaType;
   use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
+
   class ComandaController extends Controller {
       /**
        * @Route("/", name="comanda_list")
@@ -28,8 +31,20 @@
        */
       public function index() {
           $comandas = $this->getDoctrine()->getRepository(Comanda::class)->findAll();
-
           return $this->render('comanda/index.html.twig', array('comandas' => $comandas));
+      }
+
+      /**
+       * @Route("/comanda/customer/{id}", name="comanda_customer")
+       * @Method({"GET"})
+       * @param $id
+       * @return Response
+       */
+      public function listBy($id) {
+          $customer = $this->getDoctrine()->getRepository(Customer::class)->find($id);
+          $comandas = $this->getDoctrine()->getRepository(Comanda::class)->findBy(array('customer' => $customer));
+          return $this->render('comanda/index.html.twig', array('comandas' => $comandas));
+
       }
 
       /**
@@ -45,7 +60,6 @@
               ->add('customer')
               ->add('product')
               ->add('comments')
-              ->add('creation')
               ->add('part')
               ->add('service')
               ->add('technician')
@@ -85,18 +99,18 @@
               ->add('customer')
               ->add('product')
               ->add('comments')
-              ->add('creation')
               ->add('part')
               ->add('service')
               ->add('technician')
               ->add('workshop')
               ->add('save', SubmitType::class, array(
-                  'label' => 'Actualitzar',
+                  'label' => 'Update',
                   'attr' => array('class' => 'btn btn-primary mt-3')
               ))
               ->getForm();
 
           $form->handleRequest($request);
+          //$data = $form['part']->getData();
 
           if($form->isSubmitted() && $form->isValid()) {
 
@@ -112,27 +126,39 @@
       }
 
       /**
-       * @Route("/article/{id}", name="article_show")
+       * @Route("/comanda/{id}", name="comanda_show")
        */
       public function show($id) {
-          $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
+          $comanda = $this->getDoctrine()->getRepository(Comanda::class)->find($id);
 
-          return $this->render('articles/show.html.twig', array('article' => $article));
+          return $this->render('comanda/show.html.twig', array('comanda' => $comanda));
       }
 
       /**
-       * @Route("/article/delete/{id}")
+       * @Route("/comanda/delete/{id}")
        * @Method({"DELETE"})
        */
       public function delete(Request $request, $id) {
-          $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
+          $comanda = $this->getDoctrine()->getRepository(Comanda::class)->find($id);
 
           $entityManager = $this->getDoctrine()->getManager();
-          $entityManager->remove($article);
+          $entityManager->remove($comanda);
           $entityManager->flush();
 
           $response = new Response();
           $response->send();
+      }
+
+      /**
+       * @Route("/comanda/done/{id}", name="get_things_done")
+       * @param $id
+       * @return Response
+       */
+      public function done($id) {
+          $comanda = $this->getDoctrine()->getRepository(Comanda::class)->find($id);
+          $comanda->setStatus(true);
+          $this->getDoctrine()->getManager()->flush();
+          return $this->redirectToRoute('comanda_show',array('id' => $id));
       }
 
   }

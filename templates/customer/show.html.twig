@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ customer.name }}{% endblock %}
+
+{% block body %}
+    <h1>{{ customer.name }}</h1>
+    <p>DNI: {{ customer.dni }}</p>
+    <p>Telèfon: {{ customer.telephone }}</p>
+    <p>Email: {{ customer.email }}</p>
+    {% if customer.comandas|length > 0 %}
+    <a href="/comanda/customer/{{ customer.id }}" class="btn btn-primary">Anar a comandes <span class="badge badge-light">{{ customer.comandas|length }}</span></a>
+    {% endif %}
+    <hr>
+    <a href="/">Enrere</a>
+{% endblock %}

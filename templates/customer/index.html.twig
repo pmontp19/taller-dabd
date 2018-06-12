@@ -3,6 +3,7 @@
 {% block title %}Llistat clients{% endblock %}
 
 {% block body %}
+    <a href="/customer/new" class="btn btn-primary">Nou client</a>
     {% if customers %}
         <table id="customers" class="table table-striped">
             <thead>
@@ -11,6 +12,7 @@
                 <th>Client</th>
                 <th>Email</th>
                 <th>Telf</th>
+                <th>Comandes</th>
                 <th>Accions</th>
             </tr>
             </thead>
@@ -22,8 +24,10 @@
                     <td>{{ customer.email }}</td>
                     <td>{{ customer.telephone }}</td>
                     <td>
-                        <a href="/comanda/{{ customer.id }}" class="btn btn-dark">Mostrar</a>
-                        <a href="/comanda/edit/{{ customer.id }}" class="btn btn-light">Editar</a>
+                        <a href="/comanda/customer/{{ customer.id }}"><span class="badge badge-pill badge-primary">{{ customer.comandas|length }}</span></a></td>
+                    <td>
+                        <a href="/customers/{{ customer.id }}" class="btn btn-dark">Mostrar</a>
+                        <a href="/customers/edit/{{ customer.id }}" class="btn btn-light">Editar</a>
                         <a href="#" class="btn btn-danger delete-article" data-id="{{ customer.id }}">Borrar</a>
                     </td>
                 </tr>
