@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Llistat peces{% endblock %}
+
+{% block body %}
+    {% if parts %}
+        <table id="parts" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Num</th>
+                <th>Nom</th>
+                <th>Preu</th>
+                <th>Stock</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for part in parts %}
+                <tr>
+                    <td>{{ part.id }}</td>
+                    <td>{{ part.name }}</td>
+                    <td>{{ part.price }} euros</td>
+                    <td>{{ part.stock }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hi ha peces per mostrar</p>
+    {% endif %}
+{% endblock %}

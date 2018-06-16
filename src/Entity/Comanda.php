@@ -82,38 +82,19 @@ class Comanda
         $this->service = new ArrayCollection();
         $this->creation = new \DateTime('now', new \DateTimeZone('GMT+2'));
         $this->status = false;
+        $this->time = 0;
     }
 
     public function getTime() {
-        $sum = 0;
-        $services = $this->getService();
-        foreach ($services as $service) {
-            $sum = $sum + $service->getLength();
-        }
-        return $sum;
+        return $this->time;
     }
 
     public function getTotal(){
-        $parts = $this->getPart();
-        $sum=0;
-        foreach ($parts as $part) {
-            $sum = $sum + $part->getPrice();
-        }
-        $services = $this->getService();
-        foreach ($services as $service) {
-            $sum = $sum + $service->getPrice();
-        }
-        return $sum;
+        return $this->total;
     }
 
-    public function setTotal(){
-        $parts = $this->getPart();
-        $sum=0;
-        foreach ($parts as $part) {
-            $sum = $sum + $part->getPrice();
-        }
-        $this->total = $sum;
-        return $this;
+    public function setTotal($total) :void {
+        $this->total = $total;
     }
 
     public function getId()
@@ -260,5 +241,13 @@ class Comanda
     public function __toString()
     {
         return strval($this->id);
+    }
+
+    /**
+     * @param mixed $time
+     */
+    public function setTime($time): void
+    {
+        $this->time = $time;
     }
 }

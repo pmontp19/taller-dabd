@@ -13,12 +13,12 @@
   use App\Entity\Customer;
   use Doctrine\DBAL\Types\DateType;
   use Doctrine\ORM\Query\ResultSetMapping;
+  use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
   use Symfony\Component\HttpFoundation\Response;
   use Symfony\Component\HttpFoundation\Request;
   use Symfony\Component\Routing\Annotation\Route;
   use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
   use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
   use Symfony\Component\Form\Extension\Core\Type\TextType;
   use Symfony\Component\Form\Extension\Core\Type\TextareaType;
   use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -90,8 +90,12 @@
       /**
        * @Route("/comanda/edit/{id}", name="edit_comanda")
        * Method({"GET", "POST"})
+       * @param Request $request
+       * @param $id
+       * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
        */
-      public function edit(Request $request, $id) {
+      public function edit(Request $request, $id)
+      {
           $comanda = new Comanda();
           $comanda = $this->getDoctrine()->getRepository(Comanda::class)->find($id);
 
@@ -110,9 +114,8 @@
               ->getForm();
 
           $form->handleRequest($request);
-          //$data = $form['part']->getData();
 
-          if($form->isSubmitted() && $form->isValid()) {
+          if ($form->isSubmitted() && $form->isValid()) {
 
               $entityManager = $this->getDoctrine()->getManager();
               $entityManager->flush();

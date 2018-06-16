@@ -16,6 +16,7 @@
     <p>Temps que ocuparà: {{ comanda.time }} minuts</p>
     <p>Total: {{ comanda.total }} euros</p>
     <p><em>Data de creació: {{ comanda.creation|date('d-m-Y') }}</em></p>
+    <a href="/comanda/edit/{{ comanda.id }}" class="btn btn-light">Editar</a>
     <hr>
     <a href="/">Enrere</a>
 {% endblock %}

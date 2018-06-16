@@ -1,0 +1,20 @@
+{
+  "name": "DABD Taller app",
+  "description": "App to manage workshop",
+  "repository": "https://github.com/pmontp19/taller-dabd",
+  "keywords": [
+    "dabd", "taller", "symfony"
+  ],
+  "success_url": "/heroku",
+  "scripts": {
+    "postdeploy": "php bin/console doctrine:schema:create"
+  },
+  "addons": [
+
+  ],
+  "env": {
+    "SYMFONY_ENV": {
+      "value": "prod"
+    }
+  }
+}
